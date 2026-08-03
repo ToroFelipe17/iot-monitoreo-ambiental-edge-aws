@@ -1,0 +1,17 @@
+[Unit]
+Description=API de Monitoreo Ambiental IoT
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/iot-monitoreo-ambiental-edge-aws
+Environment=DATABASE_PATH=/opt/iot-monitoreo-ambiental-edge-aws/data/mediciones.db
+ExecStart=/opt/iot-monitoreo-ambiental-edge-aws/.venv/bin/uvicorn api.main:app --host 0.0.0.0 --port 8000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
